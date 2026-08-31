@@ -1,0 +1,84 @@
+// --- Navigation Logic ---
+function showPage(pageId) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+}
+
+// --- Games Logic ---
+function loadGame(url) {
+    const container = document.getElementById('game-container');
+    container.innerHTML = `<iframe src="${url}"></iframe>`;
+}
+
+// --- Proxy Logic ---
+// Note: Static proxies are limited by CORS. This is a basic iframe loader.
+function launchProxy() {
+    const url = document.getElementById('proxy-input').value;
+    const container = document.getElementById('proxy-container');
+    if (!url.startsWith('http')) {
+        alert("Please include http:// or https://");
+        return;
+    }
+    container.innerHTML = `<iframe src="${url}"></iframe>`;
+}
+
+// --- Chat Logic (Frontend Only) ---
+// Note: Because GitHub Pages is static, users can only see their own local messages 
+// unless you connect this to a service like Firebase.
+function sendChatMessage() {
+    const input = document.getElementById('chat-input');
+    const box = document.getElementById('chat-box');
+    const user = localStorage.getItem('username') || 'Guest';
+
+    if (input.value.trim() !== "") {
+        const msg = document.createElement('p');
+        msg.innerHTML = `<strong>${user}:</strong> ${input.value}`;
+        box.appendChild(msg);
+        input.value = "";
+        box.scrollTop = box.scrollHeight;
+    }
+}
+
+// --- Tools Logic ---
+function launchAboutBlank() {
+    const win = window.open();
+    const url = window.location.href;
+    const iframe = win.document.createElement('iframe');
+    iframe.style.cssText = "position:fixed;width:100vw;height:100vh;top:0px;left:0px;border:none;";
+    iframe.src = url;
+    win.document.body.appendChild(iframe);
+    window.location.replace('https://google.com'); // Redirect current tab to hide evidence
+}
+
+function clearHistory() {
+    localStorage.clear();
+    alert("Site data cleared.");
+    location.reload();
+}
+
+// --- Settings & Account ---
+function saveSettings() {
+    const name = document.getElementById('username-set').value;
+    localStorage.setItem('username', name);
+    document.getElementById('user-display').innerText = name;
+    alert("Settings Saved!");
+}
+
+function setTab(title, icon) {
+    document.title = title;
+    document.getElementById('favicon').href = icon;
+    localStorage.setItem('savedTitle', title);
+    localStorage.setItem('savedIcon', icon);
+}
+
+// Load Preferences on Start
+window.onload = () => {
+    const name = localStorage.getItem('username');
+    const title = localStorage.getItem('savedTitle');
+    const icon = localStorage.getItem('savedIcon');
+
+    if (name) document.getElementById('user-display').innerText = name;
+    if (title) document.title = title;
+    if (icon) document.getElementById('favicon').href = icon;
+};

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Docs</title> <!-- Default Cloak Title -->
+    <link rel="stylesheet" href="style.css">
+    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
+</head>
+<body>
+    <nav>
+        <div class="logo">Hub</div>
+        <button onclick="showPage('games')">Games</button>
+        <button onclick="showPage('proxy')">Proxy</button>
+        <button onclick="showPage('chat')">Chat</button>
+        <button onclick="showPage('tools')">Tools</button>
+        <button onclick="showPage('settings')">Settings</button>
+        <div id="user-display" class="user-badge">Guest</div>
+    </nav>
+
+    <main id="content">
+        <!-- Games Section -->
+        <section id="games" class="page active">
+            <h2>Games</h2>
+            <div class="game-grid">
+                <div class="card" onclick="loadGame('https://re-slope.github.io/')">Slope</div>
+                <div class="card" onclick="loadGame('https://p0p0p0p0.github.io/3/')">Minecraft</div>
+            </div>
+            <div id="game-container"></div>
+        </section>
+
+        <!-- Proxy Section -->
+        <section id="proxy" class="page">
+            <h2>Web Proxy</h2>
+            <p>Enter a URL to browse through a static frame (Note: Many sites block this. For full unblocking, host a Node.js server).</p>
+            <input type="text" id="proxy-input" placeholder="https://example.com">
+            <button onclick="launchProxy()">Browse</button>
+            <div id="proxy-container"></div>
+        </section>
+
+        <!-- Chat Section -->
+        <section id="chat" class="page">
+            <h2>Global Chat</h2>
+            <div id="chat-box" class="display-area"></div>
+            <div class="input-row">
+                <input type="text" id="chat-input" placeholder="Message...">
+                <button onclick="sendChatMessage()">Send</button>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="page">
+            <h2>Tools</h2>
+            <button class="tool-btn" onclick="launchAboutBlank()">Launch in about:blank (Cloak)</button>
+            <button class="tool-btn" onclick="clearHistory()">Clear Site Data</button>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="page">
+            <h2>Settings</h2>
+            <div class="opt">
+                <label>Display Name:</label>
+                <input type="text" id="username-set" placeholder="Username">
+                <button onclick="saveSettings()">Save</button>
+            </div>
+            <div class="opt">
+                <label>Tab Cloak:</label>
+                <button onclick="setTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">Classroom</button>
+                <button onclick="setTab('Google Drive', 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png')">Drive</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
