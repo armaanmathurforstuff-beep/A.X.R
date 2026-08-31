@@ -1,51 +1,76 @@
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #121212;
-    color: white;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Docs</title> <!-- Default Cloak Title -->
+    <link rel="stylesheet" href="style.css">
+    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
+</head>
+<body>
+    <nav>
+        <div class="logo">Hub</div>
+        <button onclick="showPage('games')">Games</button>
+        <button onclick="showPage('proxy')">Proxy</button>
+        <button onclick="showPage('chat')">Chat</button>
+        <button onclick="showPage('tools')">Tools</button>
+        <button onclick="showPage('settings')">Settings</button>
+        <div id="user-display" class="user-badge">Guest</div>
+    </nav>
 
-nav {
-    background: #1f1f1f;
-    padding: 15px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    border-bottom: 2px solid #333;
-}
+    <main id="content">
+        <!-- Games Section -->
+        <section id="games" class="page active">
+            <h2>Games</h2>
+            <div class="game-grid">
+                <div class="card" onclick="loadGame('https://re-slope.github.io/')">Slope</div>
+                <div class="card" onclick="loadGame('https://p0p0p0p0.github.io/3/')">Minecraft</div>
+            </div>
+            <div id="game-container"></div>
+        </section>
 
-button {
-    background: #333;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-}
+        <!-- Proxy Section -->
+        <section id="proxy" class="page">
+            <h2>Web Proxy</h2>
+            <p>Enter a URL to browse through a static frame (Note: Many sites block this. For full unblocking, host a Node.js server).</p>
+            <input type="text" id="proxy-input" placeholder="https://example.com">
+            <button onclick="launchProxy()">Browse</button>
+            <div id="proxy-container"></div>
+        </section>
 
-button:hover { background: #444; }
+        <!-- Chat Section -->
+        <section id="chat" class="page">
+            <h2>Global Chat</h2>
+            <div id="chat-box" class="display-area"></div>
+            <div class="input-row">
+                <input type="text" id="chat-input" placeholder="Message...">
+                <button onclick="sendChatMessage()">Send</button>
+            </div>
+        </section>
 
-.page { display: none; padding: 20px; }
-.active { display: block; }
+        <!-- Tools Section -->
+        <section id="tools" class="page">
+            <h2>Tools</h2>
+            <button class="tool-btn" onclick="launchAboutBlank()">Launch in about:blank (Cloak)</button>
+            <button class="tool-btn" onclick="clearHistory()">Clear Site Data</button>
+        </section>
 
-.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
-.card { background: #222; padding: 20px; text-align: center; border-radius: 10px; cursor: pointer; border: 1px solid #444; }
+        <!-- Settings Section -->
+        <section id="settings" class="page">
+            <h2>Settings</h2>
+            <div class="opt">
+                <label>Display Name:</label>
+                <input type="text" id="username-set" placeholder="Username">
+                <button onclick="saveSettings()">Save</button>
+            </div>
+            <div class="opt">
+                <label>Tab Cloak:</label>
+                <button onclick="setTab('Google Classroom', 'https://ssl.gstatic.com/classroom/favicon.png')">Classroom</button>
+                <button onclick="setTab('Google Drive', 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png')">Drive</button>
+            </div>
+        </section>
+    </main>
 
-.display-area {
-    background: #000;
-    height: 300px;
-    margin-bottom: 10px;
-    overflow-y: auto;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-iframe {
-    width: 100%;
-    height: 70vh;
-    border: none;
-    background: white;
-    margin-top: 15px;
-}
-
-.user-badge { margin-left: auto; font-weight: bold; color: #3498db; }
+    <script src="script.js"></script>
+</body>
+</html>
